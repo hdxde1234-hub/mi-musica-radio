@@ -1,10 +1,10 @@
 # Configuramos la carpeta de música que subiste
 musica = playlist.safe("/music")
 
-# Agarramos tus variables de entorno de Render
-host = environment.get("STREAM_HOST")
-port = int_of_string(environment.get("STREAM_PORT"))
-password = environment.get("STREAM_PASSWORD")
+# Agarramos tus variables de entorno de Render correctamente
+host = environment.get_default("STREAM_HOST", "")
+port = int_of_string(environment.get_default("STREAM_PORT", "8000"))
+password = environment.get_default("STREAM_PASSWORD", "")
 
 # Empujamos la música directo a tu Listen2MyRadio
 output.icecast(%mp3, 
