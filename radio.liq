@@ -1,11 +1,11 @@
 # Tu carpeta con tus MP3 listos
 musica = playlist.safe("/music")
 
-# La forma real, definitiva y absoluta en que lee las variables
-host = environment("STREAM_HOST")
-port = int_of_string(environment("STREAM_PORT"))
-password = environment("STREAM_PASSWORD")
-punto_montaje = environment("STREAM_MOUNT")
+# La forma real y correcta para esta versión de leer variables
+host = environment.string("STREAM_HOST")
+port = int_of_string(environment.string("STREAM_PORT"))
+password = environment.string("STREAM_PASSWORD")
+punto_montaje = environment.string("STREAM_MOUNT")
 
 # Conexión directa a Icecast
 output.icecast(%mp3, 
