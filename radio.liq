@@ -1,11 +1,11 @@
 # Tu carpeta con tus MP3 listos
 musica = playlist.safe("/music")
 
-# Agarramos tus datos desde las variables de entorno de Render
-host = environment.get_default("STREAM_HOST", "95.154.196.37")
-port = int_of_string(environment.get_default("STREAM_PORT", "37413"))
-password = environment.get_default("STREAM_PASSWORD", "iranamorir")
-punto_montaje = environment.get_default("STREAM_MOUNT", "/stream")
+# La forma exacta en que esta versión lee las variables de Render
+host = environment["STREAM_HOST"]
+port = int_of_string(environment["STREAM_PORT"])
+password = environment["STREAM_PASSWORD"]
+punto_montaje = environment["STREAM_MOUNT"]
 
 # Conexión directa a Icecast
 output.icecast(%mp3, 
