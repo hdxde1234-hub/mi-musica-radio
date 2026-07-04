@@ -1,7 +1,7 @@
 # 1. Tu carpeta estética de música
 musica = playlist.safe(mode="normal", reload_mode="watch", "/home/runner/work/mi-musica-radio/mi-musica-radio/music")
 
-# 2. Arreglo definitivo para los secretos (Cambiamos getenv por environment.get)
+# 2. Arreglo definitivo sin getenv
 host = environment.get("STREAM_HOST")
 port = int_of_string(environment.get("STREAM_PORT"))
 password = environment.get("STREAM_PASSWORD")
