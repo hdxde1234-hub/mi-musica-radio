@@ -1,9 +1,9 @@
 # 1. CAPTURAR EL PUERTO QUE RENDER EXIGE
 puerto_web = int_of_string(getenv("PORT"))
 
-# Configuramos el servidor interno de Liquidsoap en ese puerto
+# Configuramos el servidor interno con la sintaxis correcta para tu versión
 set("harbor.bind_addr", "0.0.0.0")
-settings.harbor.http.port.set(puerto_web)
+set("harbor.http.port", puerto_web)
 
 # 2. CREAR LA PÁGINA WEB PARA ENGAÑAR A RENDER (Y A LOS PINGS)
 def respuesta_ping(~protocol, ~data, ~headers, uri) =
@@ -14,7 +14,7 @@ def respuesta_ping(~protocol, ~data, ~headers, uri) =
   )
 end
 
-# Registramos la página web en la raíz "/" del puerto de Render
+# Registramos la página web en la raíz "/"
 harbor.http.register.simple(port=puerto_web, method="GET", "/", respuesta_ping)
 
 
