@@ -1,14 +1,14 @@
 # 1. CAPTURAR EL PUERTO QUE RENDER EXIGE
 puerto_web = int_of_string(getenv("PORT"))
 
-# Configuramos el servidor interno con la sintaxis correcta para tu versión
+# Configuramos el servidor interno con la sintaxis correcta
 set("harbor.bind_addr", "0.0.0.0")
 set("harbor.http.port", puerto_web)
 
-# 2. CREAR LA PÁGINA WEB PARA ENGAÑAR A RENDER (Y A LOS PINGS)
+# 2. CREAR LA PÁGINA WEB PARA ENGAÑAR A RENDER
 def respuesta_ping(~protocol, ~data, ~headers, uri) =
   http.response(
-    status_code=200,
+    code=200,
     headers=[("Content-Type", "text/html; charset=utf-8")],
     data="<h1>📻 Radio Activa 24/7 en linea y escuchando pings!</h1>"
   )
