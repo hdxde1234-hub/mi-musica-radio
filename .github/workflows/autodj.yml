@@ -1,10 +1,7 @@
 name: 📻 Auto DJ Inmortal gratis 24/7
 
 on:
-  # El botón manual por si acaso
   workflow_dispatch:
-  
-  # EL DESPERTADOR AUTOMÁTICO: Se activa solo cada 5 horas (300 minutos)
   schedule:
     - cron: '0 */5 * * *'
 
@@ -13,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 📥 Clonar las canciones de GitHub
-      uses: actions/checkout@v3
+    - name: 📥 Clonar las canciones de GitHub (Versión Moderna)
+      uses: actions/checkout@v4
 
     - name: 🐧 Instalar Liquidsoap en el Robot
       run: |
