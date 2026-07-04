@@ -1,20 +1,22 @@
+# 1. Traemos Node.js oficial listo para usar
+FROM node:22-slim AS node
+
+# 2. Tu imagen de siempre de Liquidsoap
 FROM savonet/liquidsoap:v2.1.4
 
-# Cambiamos a root temporalmente para instalar Node.js
+# 3. Le copiamos Node.js directamente (sin instalar nada raro)
 USER root
-RUN apt-get update && apt-get install -y curl && \
-    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
-    apt-get install -y nodejs
+COPY --from=node /usr/local /usr/local
 
-# Configuramos el directorio de trabajo
+# 4. Configuramos tu carpeta de música
 WORKDIR /music
 COPY --chown=liquidsoap:liquidsoap . /music
 
-# Instalamos Express para la web
+# Instalamos express
 RUN npm install express
 
-# Volvemos al usuario de liquidsoap por seguridad
+# Volvemos al usuario de la radio por seguridad
 USER liquidsoap
 
-# Ahora ejecutamos el archivo index.js con Node
+# Ejecutamos el archivo de Node
 CMD ["node", "index.js"]
