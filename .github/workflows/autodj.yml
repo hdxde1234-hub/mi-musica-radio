@@ -1,8 +1,12 @@
-name: 📻 Auto DJ Inmortal gratis
+name: 📻 Auto DJ Inmortal gratis 24/7
 
 on:
-  # Esto nos da el botón mágico para prender la radio a mano cuando queramos
+  # El botón manual por si acaso
   workflow_dispatch:
+  
+  # EL DESPERTADOR AUTOMÁTICO: Se activa solo cada 5 horas (300 minutos)
+  schedule:
+    - cron: '0 */5 * * *'
 
 jobs:
   transmitir:
