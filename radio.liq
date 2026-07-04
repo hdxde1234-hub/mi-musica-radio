@@ -1,7 +1,24 @@
-# Le ordenamos a Liquidsoap que encienda la web de Python en segundo plano
-system("python3 /web.py &")
+# 1. CAPTURAR EL PUERTO QUE RENDER EXIGE
+puerto_web = int_of_string(getenv("PORT"))
 
-# Tu configuración de música de siempre (El tubo)
+# Configuramos el servidor interno de Liquidsoap en ese puerto
+set("harbor.bind_addr", "0.0.0.0")
+settings.harbor.http.port.set(puerto_web)
+
+# 2. CREAR LA PÁGINA WEB PARA ENGAÑAR A RENDER (Y A LOS PINGS)
+def respuesta_ping(~protocol, ~data, ~headers, uri) =
+  http.response(
+    status_code=200,
+    headers=[("Content-Type", "text/html; charset=utf-8")],
+    data="<h1>📻 Radio Activa 24/7 en linea y escuchando pings!</h1>"
+  )
+end
+
+# Registramos la página web en la raíz "/" del puerto de Render
+harbor.http.register.simple(port=puerto_web, method="GET", "/", respuesta_ping)
+
+
+# 3. TU MÚSICA Y CONEXIÓN DE SIEMPRE
 musica = playlist.safe("/music")
 
 host = getenv("STREAM_HOST")
