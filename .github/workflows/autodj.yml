@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 📥 Clonar las canciones de GitHub (Versión Moderna)
+    - name: 📥 Clonar el repositorio
       uses: actions/checkout@v4
 
-    - name: 🐧 Instalar Liquidsoap en el Robot
+    - name: 🐧 Instalar Liquidsoap
       run: |
         sudo apt-get update
         sudo apt-get install -y liquidsoap
