@@ -1,0 +1,27 @@
+name: 📻 Auto DJ Inmortal gratis
+
+on:
+  # Esto nos da el botón mágico para prender la radio a mano cuando queramos
+  workflow_dispatch:
+
+jobs:
+  transmitir:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Clonar las canciones de GitHub
+      uses: actions/checkout@v3
+
+    - name: 🐧 Instalar Liquidsoap en el Robot
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y liquidsoap
+
+    - name: 🎶 ¡Prender la radio y transmitir!
+      env:
+        STREAM_HOST: ${{ secrets.STREAM_HOST }}
+        STREAM_PORT: ${{ secrets.STREAM_PORT }}
+        STREAM_PASSWORD: ${{ secrets.STREAM_PASSWORD }}
+        STREAM_MOUNT: ${{ secrets.STREAM_MOUNT }}
+      run: |
+        liquidsoap /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/radio.liq
