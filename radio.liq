@@ -1,7 +1,6 @@
-# Tu música guardada en la carpeta
-musica = playlist.safe("/music")
+# LA RUTA REAL: Apuntamos directo a la raíz del proyecto en GitHub
+musica = playlist.safe(mode="normal", reload_mode="watch", "/home/runner/work/mi-musica-radio/mi-musica-radio")
 
-# Tus datos secretos de Listen2myradio
 host = getenv("STREAM_HOST")
 port = int_of_string(getenv("STREAM_PORT"))
 password = getenv("STREAM_PASSWORD")
