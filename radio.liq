@@ -1,5 +1,5 @@
-# LA RUTA REAL: Apuntamos directo a la raíz del proyecto en GitHub
-musica = playlist.safe(mode="normal", reload_mode="watch", "/home/runner/work/mi-musica-radio/mi-musica-radio")
+# El código estético: apunta directo a la carpeta de música
+musica = playlist.safe(mode="normal", reload_mode="watch", "/home/runner/work/mi-musica-radio/mi-musica-radio/music")
 
 host = getenv("STREAM_HOST")
 port = int_of_string(getenv("STREAM_PORT"))
