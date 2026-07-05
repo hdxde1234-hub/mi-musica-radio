@@ -1,9 +1,9 @@
-name: 📻 Auto DJ Inmortal gratis 24/7
+name: Auto DJ Inmortal gratis 24/7
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */5 * * *'
+    - cron: '0 */3 * * *' # Se activa solito cada 3 horas para que la radio nunca muera
 
 jobs:
   transmitir:
@@ -25,4 +25,4 @@ jobs:
         STREAM_PASSWORD: ${{ secrets.STREAM_PASSWORD }}
         STREAM_MOUNT: ${{ secrets.STREAM_MOUNT }}
       run: |
-        liquidsoap /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/radio.liq
+        liquidsoap /home/runner/work/mi-musica-radio/mi-musica-radio/radio.liq
