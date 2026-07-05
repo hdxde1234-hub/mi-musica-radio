@@ -3,7 +3,7 @@ name: Auto DJ Inmortal gratis 24/7
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */3 * * *' # Se activa solito cada 3 horas para que la radio nunca muera
+    - cron: '0 */5 * * *' # Se activa solito cada 5 horas exactas como querías vv
 
 jobs:
   transmitir:
