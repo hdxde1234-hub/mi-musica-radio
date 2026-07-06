@@ -1,15 +1,17 @@
-# 1. Tu carpeta estética de música
+# 1. Tu carpeta de música
 musica = playlist.safe(mode="normal", reload_mode="watch", "/home/runner/work/mi-musica-radio/mi-musica-radio/music")
 
-# 2. Arreglo definitivo sin getenv (Ya no necesitamos el MOUNT)
+# 2. Tu configuración original de Icecast para Listen2
 host = environment.get("STREAM_HOST")
 port = int_of_string(environment.get("STREAM_PORT"))
 password = environment.get("STREAM_PASSWORD")
+punto_montaje = environment.get("STREAM_MOUNT")
 
-# 3. Mandar la señal a la nueva radio Shoutcast v1
-output.shoutcast(%mp3, 
+# 3. Mandar la señal a la radio de siempre
+output.icecast(%mp3, 
   host=host, 
   port=port, 
   password=password, 
+  mount=punto_montaje, 
   musica
 )
