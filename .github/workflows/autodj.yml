@@ -3,7 +3,7 @@ name: Auto DJ Inmortal gratis 24/7
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */5 * * *' # Se activa solito cada 5 horas exactas como querías vv
+    - cron: '0 */4 * * *' # ⏰ ¡Modificado! Ahora se activa cada 4 horas exactas para que nunca se caiga
 
 jobs:
   transmitir:
@@ -18,6 +18,13 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y liquidsoap
 
+    - name: 🌍 Despertar página web de Listen2myradio
+      run: |
+        echo "Engañando al sistema de Listen2myradio..."
+        curl -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" -s https://ekiznadaya.radio12345.com/ > /dev/null
+        sleep 5
+        echo "¡Página visitada y servidor despierto!"
+
     - name: 🎶 ¡Prender la radio y transmitir!
       env:
         STREAM_HOST: ${{ secrets.STREAM_HOST }}
@@ -25,4 +32,5 @@ jobs:
         STREAM_PASSWORD: ${{ secrets.STREAM_PASSWORD }}
         STREAM_MOUNT: ${{ secrets.STREAM_MOUNT }}
       run: |
-        liquidsoap /home/runner/work/mi-musica-radio/mi-musica-radio/radio.liq
+        # Ejecutamos con control de cierre limpio para respetar el final de la canción
+        liquidsoap radio.liq
